@@ -10,11 +10,11 @@
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Skinhelper addon that shows alive servers</summary>
         <summary lang="de">Zeigt den Status Deiner Server im Netzwerk an</summary>
-        <description lang="en">Skinhelper addon that pings a list of servers and visualize their state. A skin integration is required. Therefore, properties are stored into the skin. In addition, the addon can also be started as a service (default: off). In this mode, the add-on updates the status of the registered servers every 10 seconds. this Find more about this in the readme.</description>
-        <description lang="de">Dieses Addon pingt Server in Deinem Netzwerk an und visualisiert den Status dieser Server. Zur Anzeige sind Änderungen am Skin erforderlich. Dazu werden Properties im Skin gesetzt. Zusätzlich kann das Addon auch als Dienst getartet werden (default: off). In diesem Modus aktualisiert das Addon alle 10 Sekunden den Status der eingetragenen Server. Weitere Hinweise findest Du in der Readme dieses Addons.</description>
+        <description lang="en">Skinhelper addon that pings a list of servers and visualizes their state. A skin integration is required. Properties are stored into the skin window (Window(10000)). The addon can also run as a background service (default: off) and updates server states every 10 seconds. Wake-on-LAN is supported. See the README for skin integration details.</description>
+        <description lang="de">Dieses Addon pingt bis zu 5 Server im Netzwerk an und visualisiert deren Status. Zur Anzeige sind Anpassungen am Skin erforderlich - der Status wird als Skin-Property in Window(10000) gespeichert. Das Addon kann auch als Hintergrunddienst laufen (Standard: aus) und aktualisiert den Status alle 10 Sekunden. Wake-on-LAN wird ebenfalls unterstützt. Details zur Skin-Integration findest Du in der README.</description>
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
-        <source></source>
+        <source>https://github.com/blauesgruen/script.skinhelper.ping</source>
         <forum></forum>
         <email></email>
         <assets>

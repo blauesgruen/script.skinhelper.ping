@@ -1,0 +1,8 @@
+v4.0.0+matrix (2026-03-04)
+- Rewrite für Kodi 19+ (Matrix) / Python 3
+- Korrekte Implementierung von Monitor.onSettingsChanged() - Einstellungsänderungen werden nun zur Laufzeit erkannt
+- Potentiellen UnboundLocalError im Service-Modus behoben
+- Settings-Format auf Kodi v2 Schema aktualisiert (settings.xml)
+- MAC-Adress-Validierung vor Wake-on-LAN-Aufruf hinzugefügt
+- GitHub-Source-URL in addon.xml eingetragen
+- Beschreibungstexte (EN/DE) überarbeitet und korrigiert
