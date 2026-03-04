@@ -15,7 +15,8 @@
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
         <source>https://github.com/blauesgruen/script.skinhelper.ping</source>
-        <forum>https://github.com/blauesgruen/script.skinhelper.ping/issues</forum>
+        <news>v4.0.0+matrix: Rewrite fuer Kodi 19+ (Matrix) / Python 3</news>
+        <forum>https://www.kodinerds.net/thread/55406-release-skinhelper-ping/?postID=360349&highlight=skinhelper%2Bping#post360349</forum>
         <email></email>
         <assets>
             <icon>icon.png</icon>
