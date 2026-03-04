@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings version="2">
+
+    <section id="servers">
+
+        <category id="server1" label="32002">
+            <group id="1">
+                <setting id="name1" type="string" label="32007">
+                    <default></default>
+                </setting>
+                <setting id="ip1" type="ipaddress" label="32008">
+                    <default></default>
+                </setting>
+                <setting id="mac1" type="string" label="32009">
+                    <default></default>
+                </setting>
+            </group>
+        </category>
+
+        <category id="server2" label="32003">
+            <group id="1">
+                <setting id="name2" type="string" label="32007">
+                    <default></default>
+                </setting>
+                <setting id="ip2" type="ipaddress" label="32008">
+                    <default></default>
+                </setting>
+                <setting id="mac2" type="string" label="32009">
+                    <default></default>
+                </setting>
+            </group>
+        </category>
+
+        <category id="server3" label="32004">
+            <group id="1">
+                <setting id="name3" type="string" label="32007">
+                    <default></default>
+                </setting>
+                <setting id="ip3" type="ipaddress" label="32008">
+                    <default></default>
+                </setting>
+                <setting id="mac3" type="string" label="32009">
+                    <default></default>
+                </setting>
+            </group>
+        </category>
+
+        <category id="server4" label="32005">
+            <group id="1">
+                <setting id="name4" type="string" label="32007">
+                    <default></default>
+                </setting>
+                <setting id="ip4" type="ipaddress" label="32008">
+                    <default></default>
+                </setting>
+                <setting id="mac4" type="string" label="32009">
+                    <default></default>
+                </setting>
+            </group>
+        </category>
+
+        <category id="server5" label="32006">
+            <group id="1">
+                <setting id="name5" type="string" label="32007">
+                    <default></default>
+                </setting>
+                <setting id="ip5" type="ipaddress" label="32008">
+                    <default></default>
+                </setting>
+                <setting id="mac5" type="string" label="32009">
+                    <default></default>
+                </setting>
+            </group>
+        </category>
+
+    </section>
+
+    <section id="options">
+        <category id="service_cat" label="5">
+            <group id="1">
+                <setting id="service" type="boolean" label="32012">
+                    <default>false</default>
+                </setting>
+            </group>
+        </category>
+    </section>
+
+</settings>

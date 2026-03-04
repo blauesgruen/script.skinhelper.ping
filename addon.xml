@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.skinhelper.ping" name="Skinhelper PING" version="4.0.0+matrix" provider-name="PvD, rewrite from _Andy_">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Skinhelper addon that shows alive servers</summary>
+        <summary lang="de">Zeigt den Status Deiner Server im Netzwerk an</summary>
+        <description lang="en">Skinhelper addon that pings a list of servers and visualize their state. A skin integration is required. Therefore, properties are stored into the skin. In addition, the addon can also be started as a service (default: off). In this mode, the add-on updates the status of the registered servers every 10 seconds. this Find more about this in the readme.</description>
+        <description lang="de">Dieses Addon pingt Server in Deinem Netzwerk an und visualisiert den Status dieser Server. Zur Anzeige sind Änderungen am Skin erforderlich. Dazu werden Properties im Skin gesetzt. Zusätzlich kann das Addon auch als Dienst getartet werden (default: off). In diesem Modus aktualisiert das Addon alle 10 Sekunden den Status der eingetragenen Server. Weitere Hinweise findest Du in der Readme dieses Addons.</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+        <source></source>
+        <forum></forum>
+        <email></email>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
