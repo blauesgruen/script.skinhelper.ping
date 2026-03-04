@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.skinhelper.ping" name="Skinhelper PING" version="4.0.1" provider-name="PvD, blauesgruen, rewrite from _Andy_">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -7,16 +8,15 @@
     </extension>
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Skinhelper addon that shows alive servers</summary>
-        <summary lang="de">Zeigt den Status Deiner Server im Netzwerk an</summary>
-        <description lang="en">Skinhelper addon that pings a list of servers and visualizes their state. A skin integration is required. Properties are stored into the skin window (Window(10000)). The addon can also run as a background service (default: off) and updates server states every 10 seconds. Wake-on-LAN is supported. See the README for skin integration details.</description>
-        <description lang="de">Dieses Addon pingt bis zu 5 Server im Netzwerk an und visualisiert deren Status. Zur Anzeige sind Anpassungen am Skin erforderlich - der Status wird als Skin-Property in Window(10000) gespeichert. Das Addon kann auch als Hintergrunddienst laufen (Standard: aus) und aktualisiert den Status alle 10 Sekunden. Wake-on-LAN wird ebenfalls unterstützt. Details zur Skin-Integration findest Du in der README.</description>
+        <summary lang="en_GB">Skinhelper addon that shows alive servers</summary>
+        <summary lang="de_DE">Zeigt den Status Deiner Server im Netzwerk an</summary>
+        <description lang="en_GB">Skinhelper addon that pings a list of servers and visualizes their state. A skin integration is required. Properties are stored into the skin window (Window(10000)). The addon can also run as a background service (default: off) and updates server states every 10 seconds. Wake-on-LAN is supported. See the README for skin integration details.</description>
+        <description lang="de_DE">Dieses Addon pingt bis zu 5 Server im Netzwerk an und visualisiert deren Status. Zur Anzeige sind Anpassungen am Skin erforderlich - der Status wird als Skin-Property in Window(10000) gespeichert. Das Addon kann auch als Hintergrunddienst laufen (Standard: aus) und aktualisiert den Status alle 10 Sekunden. Wake-on-LAN wird ebenfalls unterstützt. Details zur Skin-Integration findest Du in der README.</description>
         <platform>all</platform>
-        <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+        <license>GPL-3.0-or-later</license>
         <source>https://github.com/blauesgruen/script.skinhelper.ping</source>
-        <news>v4.0.0+matrix: Rewrite fuer Kodi 19+ (Matrix) / Python 3</news>
-        <forum>https://www.kodinerds.net/thread/55406-release-skinhelper-ping/?postID=360349&highlight=skinhelper%2Bping#post360349</forum>
-        <email></email>
+        <forum>https://www.kodinerds.net/thread/55406-release-skinhelper-ping/?postID=360349&amp;highlight=skinhelper%2Bping#post360349</forum>
+        <news>v4.0.1: Bugfixes fuer Kodi 19+ (Matrix) / Python 3 - Monitor.onSettingsChanged() korrigiert, Settings-Format v2, MAC-Validierung</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
