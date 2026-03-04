@@ -15,7 +15,7 @@
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
         <source>https://github.com/blauesgruen/script.skinhelper.ping</source>
-        <forum></forum>
+        <forum>https://github.com/blauesgruen/script.skinhelper.ping/issues</forum>
         <email></email>
         <assets>
             <icon>icon.png</icon>
