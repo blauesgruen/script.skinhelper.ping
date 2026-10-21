@@ -57,3 +57,79 @@ msgstr "Im Setup des Addons sind keine Server eingetragen. Stelle sicher, dass w
 msgctxt "#32012"
 msgid "Start Addon as Service"
 msgstr "Starte Addon als Dienst"
+
+msgctxt "#32013"
+msgid "Network scan"
+msgstr "Netzwerksuche"
+
+msgctxt "#32014"
+msgid "Scan local network for devices"
+msgstr "Lokales Netzwerk nach Geräten durchsuchen"
+
+msgctxt "#32016"
+msgid "Select network"
+msgstr "Netzwerk auswählen"
+
+msgctxt "#32017"
+msgid "The selected network has {} addresses. The scan limit is {} addresses."
+msgstr "Das ausgewählte Netzwerk umfasst {} Adressen. Die Scan-Grenze liegt bei {} Adressen."
+
+msgctxt "#32018"
+msgid "Scanning {}"
+msgstr "Durchsuche {}"
+
+msgctxt "#32019"
+msgid "Checked {} of {} addresses"
+msgstr "{} von {} Adressen geprüft"
+
+msgctxt "#32020"
+msgid "Network scan canceled."
+msgstr "Netzwerksuche abgebrochen."
+
+msgctxt "#32021"
+msgid "No devices were found on this network."
+msgstr "In diesem Netzwerk wurden keine Geräte gefunden."
+
+msgctxt "#32022"
+msgid "MAC address not found"
+msgstr "MAC-Adresse nicht gefunden"
+
+msgctxt "#32023"
+msgid "Select device to add"
+msgstr "Gerät zum Hinzufügen auswählen"
+
+msgctxt "#32024"
+msgid "Device name"
+msgstr "Gerätename"
+
+msgctxt "#32025"
+msgid "All five device slots are already in use."
+msgstr "Alle fünf Geräteplätze sind bereits belegt."
+
+msgctxt "#32026"
+msgid "No usable network adapter was found. You can still enter device details manually."
+msgstr "Kein verwendbarer Netzwerkadapter gefunden. Sie können Gerätedaten weiterhin manuell eingeben."
+
+msgctxt "#32027"
+msgid "MAC address"
+msgstr "MAC-Adresse"
+
+msgctxt "#32028"
+msgid "The MAC address is invalid."
+msgstr "Die MAC-Adresse ist ungültig."
+
+msgctxt "#32029"
+msgid "This IP or MAC address is already configured."
+msgstr "Diese IP- oder MAC-Adresse ist bereits eingetragen."
+
+msgctxt "#32030"
+msgid "Add this device to slot {}?\n{}"
+msgstr "Dieses Gerät in Geräteplatz {} übernehmen?\n{}"
+
+msgctxt "#32031"
+msgid "Device added to slot {}."
+msgstr "Gerät in Geräteplatz {} übernommen."
+
+msgctxt "#32032"
+msgid "No MAC address is entered. Wake-on-LAN will not work for this device. Add it anyway?"
+msgstr "Es ist keine MAC-Adresse eingetragen. Wake-on-LAN funktioniert für dieses Gerät dann nicht. Trotzdem übernehmen?"

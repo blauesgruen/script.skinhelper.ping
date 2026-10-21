@@ -1,8 +1,21 @@
+Unveröffentlicht
+- Add-on-Einstellungen für Kodi 22 repariert; bestehende Geräte-Einstellungs-IDs bleiben erhalten.
+- Abbrechbare Suche im lokalen IPv4-Netz mit Adapterauswahl und Übernahme gefundener Geräte ergänzt.
+- Gerätenamen lassen sich vor dem Hinzufügen bearbeiten; manuelle Eingabe bleibt möglich.
+- Add-on-Symbol mit einer klareren Netzwerk- und IP-Grafik überarbeitet.
+
+v4.1.0
+- Kodi 22 "Piers" compatibility: retain Kodi Python ABI 3.0.0 support (Kodi 19+).
+- Run ping with argument lists instead of a shell; handle a missing ping executable.
+- Keep server status property names consistent and clear status for removed hosts.
+- Validate and normalize MAC addresses before Wake-on-LAN.
+- Reject malformed Wake-on-LAN script parameters safely.
+
 v4.0.0+matrix (2026-03-04)
-- Rewrite für Kodi 19+ (Matrix) / Python 3
-- Korrekte Implementierung von Monitor.onSettingsChanged() - Einstellungsänderungen werden nun zur Laufzeit erkannt
-- Potentiellen UnboundLocalError im Service-Modus behoben
-- Settings-Format auf Kodi v2 Schema aktualisiert (settings.xml)
-- MAC-Adress-Validierung vor Wake-on-LAN-Aufruf hinzugefügt
-- GitHub-Source-URL in addon.xml eingetragen
-- Beschreibungstexte (EN/DE) überarbeitet und korrigiert
+- Rewrite for Kodi 19+ (Matrix) / Python 3.
+- Correctly implement Monitor.onSettingsChanged(); settings changes are detected at runtime.
+- Fix potential UnboundLocalError in service mode.
+- Update settings.xml to Kodi settings schema v2.
+- Add MAC-address validation before Wake-on-LAN.
+- Add GitHub source URL to addon.xml.
+- Update and correct English and German descriptions.
