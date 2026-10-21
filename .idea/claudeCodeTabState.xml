@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ClaudeCodeTabState">
+    <option name="tabNames">
+      <map>
+        <entry key="0" value="Piers" />
+        <entry key="1" value="Omega" />
+      </map>
+    </option>
     <option name="tabSessions">
       <map>
         <entry key="0">
@@ -15,7 +21,20 @@
             </TabSessionState>
           </value>
         </entry>
+        <entry key="1">
+          <value>
+            <TabSessionState>
+              <option name="projectPath" value="H:\at_work\Github\script.skinhelper.ping" />
+              <option name="provider" value="codex" />
+              <option name="sessionId" value="01a15e6e-e056-7993-b8ca-9ea064fb1b75" />
+              <option name="cwd" value="H:\at_work\Github\script.skinhelper.ping" />
+              <option name="model" value="gpt-6-luna" />
+              <option name="permissionMode" value="bypassPermissions" />
+            </TabSessionState>
+          </value>
+        </entry>
       </map>
     </option>
+    <option name="tabCount" value="2" />
   </component>
 </project>
