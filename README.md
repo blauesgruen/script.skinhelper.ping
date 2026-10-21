@@ -1,117 +1,65 @@
-Skinhelper PING / Skinhelper Ping Service
-===============
+# Skinhelper PING
 
-Informationen für Skinner / Informations for skinners
-----------------------------------------------------
+Skinhelper PING ist ein Kodi-Addon für Kodi 19 und neuer, einschließlich Kodi 22 „Piers“. Es überwacht bis zu zehn Geräte im Netzwerk per Ping und stellt Status, Namen, IP- und MAC-Adressen als Properties im Home-Fenster (`Window(10000)`) bereit. Außerdem kann es Geräte per Wake-on-LAN starten.
 
-<b>Benutzung / Usage</b>
+Eine Skin-Integration ist nötig, wenn der Status im Skin angezeigt werden soll. Alternativ lässt sich der Status im Add-on-Menü ansehen. Der optionale Hintergrunddienst ist standardmäßig ausgeschaltet und aktualisiert die Werte bei Aktivierung alle zehn Sekunden.
 
-Startet das Addon und setzt den Status der Server in den Eigenschaften des Home-Windows / Runs the addon and store the 
-state of the servers into the properties of the home window (This modification below isn't needed when addon is running as service):
+## Einrichtung
 
-	<onclick>RunScript(script.skinhelper.ping,status)</onclick>
+Trage in den Add-on-Einstellungen je Gerät Name, IP-Adresse und MAC-Adresse ein. Für eine Statusprüfung wird eine IP-Adresse benötigt; zum Aufwecken per Wake-on-LAN eine gültige MAC-Adresse. Aktuell können bis zu zehn Geräte konfiguriert werden. Alle zehn Plätze stehen gemeinsam in der Kategorie **Geräte**.
 
-Sendet ein WOL Paket an den Server 1 - 5 / Send a WOL magic packet to the server 1- 5:
+Jeder Geräteplatz hat dort die Aktion **Gerät löschen**. Nach einer Sicherheitsabfrage werden Name, IP-Adresse und MAC-Adresse dieses Platzes geleert; die übrigen Geräte bleiben unverändert.
 
-    <onclick>RunScript(script,skinhelper.ping,wol<n>)</onclick> 
+Mit **Netzwerksuche** kannst Du ein lokales IPv4-Netz durchsuchen. Bei mehreren Netzwerkadaptern wählst Du den passenden aus. Unter Windows laufen die dafür gestarteten Systemwerkzeuge ohne sichtbare Konsolenfenster. Nach dem Scan kannst Du mehrere gefundene Geräte nacheinander auswählen, Namen bearbeiten und jeweils eine freie Geräteposition festlegen. Nach jeder Übernahme kehrst Du zur Ergebnisliste zurück; Abbrechen beendet die Auswahl. Der Scan ist auf 4096 IP-Adressen pro Durchlauf begrenzt und kann abgebrochen werden. IP- und MAC-Adressen werden aus erreichbaren Geräten und der lokalen Nachbartabelle ermittelt; Gerätenamen werden nach Möglichkeit per Reverse-DNS vorgeschlagen. Nicht jedes Gerät beantwortet Ping oder stellt seine MAC-Adresse bereit. Eine gefundene MAC-Adresse wird direkt übernommen. Wenn sie fehlt, bleibt das Feld leer; Name, IP und MAC lassen sich später weiterhin in den Add-on-Einstellungen ändern.
 
-wobei &lt;n&gt; die Nummer des zu weckenden Servers ist. / where &lt;n&gt; is the number of the server that has to woke up. 
-	
-Öffnet ein Menü, in dem der Status der Server angezeigt wird. Server können aus diesem Menü heraus per WOL 
-geweckt werden. Das ist auch das normale Verhalten, wenn das Addon über das Addon Menü, Programme, gestartet wird. / Opens 
-a menu with the state of all servers. Servers can woked up by sending a WOL-Packet. This is also the normal behaviour when 
-starting an addon via addon menu, programs.
+## Aufruf aus einem Skin
 
-	<onclick>RunScript(script.skinhelper.ping)</onclick>
+Status aktualisieren:
 
-Zusätzlich kann das Addon auch als Dienst gestartet werden (default: off). In diesem Modus aktualisiert das Addon alle 10 
-Sekunden den Status der eingetragenen Server. / In addition, the addon can also be started as a service (default: off). 
-In this mode, the add-on updates the status of the registered servers every 10 seconds.
-
-<b>Properties</b>
-
-Online-Status Server 1 - 5 / Online state of servers 1 - 5:
- 
-    $INFO[Window(Home).Property(SkinHelperPING.server1)]
-    $INFO[Window(Home).Property(SkinHelperPING.server2)]
-    $INFO[Window(Home).Property(SkinHelperPING.server3)]
-    $INFO[Window(Home).Property(SkinHelperPING.server4)]
-    $INFO[Window(Home).Property(SkinHelperPING.server5)]
-    
-Name der Server 1 - 5. Der Name ist beliebig wählbar und muss nicht der Name des Servers im Netzwerk sein / Server 
-names 1 - 5. The name can be chosen as desired and does not match the name of the server in the network:
-	
-    $INFO[Window(Home).Property(SkinHelperPING.servername1)]
-    $INFO[Window(Home).Property(SkinHelperPING.servername2)]
-    $INFO[Window(Home).Property(SkinHelperPING.servername3)]
-    $INFO[Window(Home).Property(SkinHelperPING.servername4)]
-    $INFO[Window(Home).Property(SkinHelperPING.servername5)]
-    
-IP-Adressen der Server 1 - 5 / IPs of the servers 1 - 5:
-	
-    $INFO[Window(Home).Property(SkinHelperPING.ip1)]
-    $INFO[Window(Home).Property(SkinHelperPING.ip2)]
-    $INFO[Window(Home).Property(SkinHelperPING.ip3)]
-    $INFO[Window(Home).Property(SkinHelperPING.ip4)]
-    $INFO[Window(Home).Property(SkinHelperPING.ip5)]
-    
-MAC-Adressen der Server 1 - 5 / MAC of servers 1 - 5:
-	
-    $INFO[Window(Home).Property(SkinHelperPING.mac1)]
-    $INFO[Window(Home).Property(SkinHelperPING.mac2)]
-    $INFO[Window(Home).Property(SkinHelperPING.mac3)]
-    $INFO[Window(Home).Property(SkinHelperPING.mac4)]
-    $INFO[Window(Home).Property(SkinHelperPING.mac5)]
-
-<b>zusätzliche Infos / additional Informations</b>
- 
-Anzahl der Einträge in den Einstellungen / Count of servers in settings:
-
-    $INFO[Window(Home).Property(SkinHelperPING.servercount)]
-    
-Anzahl der Server mit Online Status / Count of online servers:
-
-    $INFO[Window(Home).Property(SkinHelperPING.serveron)]
-    
-Anzahl der Server mit Offline Status / Count of offline servers:
-
-    $INFO[Window(Home).Property(SkinHelperPING.serveroff)]
-
-Skinintegration / Skin integration
-----------------------------------
-
-<b>Beispiel für die Implementation ins Hauptmenü / Example for implementation into the main menu:</b>
-
-Addon ausführen, das Addon wird dabei bei jedem Aufruf des Hauptmenüs gestartet / Runs the addon on every call of the main menu:
-
+```xml
+<onclick>RunScript(script.skinhelper.ping,status)</onclick>
 ```
-	<?xml version="1.0" encoding="UTF-8"?>
-	<window>
-		<defaultcontrol always="true">9000</defaultcontrol>
-		<onload condition="System.HasAddon(script.skinhelper.ping)">RunScript(script.skinhelper.ping,status)</onload>
-		<controls>
-		.
-		.
-		.
-```
-	
-Darstellung per Button, zusätzlich wird ein Label integriert. Die Grafik für den Button 'ServerIcon.png' kann 
-aus dem 'resources/media'-Verzeichnis des Addons in das 'media'-Verzeichnis des verwendeten Skins kopiert 
-werden. / Presentation via button and an additional label. The icon bitmap 'ServerIcon.png' within the 
-'resources/media' folder of the addon must copied into the 'media' folder of the used skin. 
 
+Gerät 1 bis 10 per Wake-on-LAN wecken:
+
+```xml
+<onclick>RunScript(script.skinhelper.ping,wol1)</onclick>
 ```
-	<control type="button">
-		<width>38</width>
-		<height>40</height>
-		<textoffsetx>0</textoffsetx>
-		<textwidht>40</textwidht>
-		<label>$INFO[Window(Home).Property(SkinHelperPING.serveron)]</label>					    # "Label" - hier die Anzahl der Server die Online sind
-		<texturefocus>ServerIcon.png</texturefocus>      		                                    # Grafik die dargestellt werden soll (fokus)
-		<texturenofocus>ServerIcon.png</texturenofocus>			                                    # Grafik die dargestellt werden soll (nicht fokus)
-		<visible>Integer.IsGreater(Window(Home).Property(SkinHelperPING.servercount),0)</visible>	# sichtbar wenn es Einträge in den Einstellungen gibt
-		<visible>Integer.IsGreater(Window(Home).Property(SkinHelperPING.serveron),0)</visible>		# sichtbar wenn mind. 1 Server online ist
-		<visible>System.HasAddon(script.skinhelper.ping)</visible>									# sichtbar wenn das Script installiert ist
-	</control>
-	
+
+Ersetze `wol1` durch `wol2` bis `wol10` für die weiteren Geräte. Ohne Parameter öffnet das Add-on eine Auswahlliste mit den konfigurierten Geräten.
+
+## Skin-Properties
+
+Die Werte sind über `Window(Home).Property(...)` verfügbar:
+
+- `SkinHelperPING.server1` bis `server10`: `on` oder `off` für konfigurierte Geräte
+- `SkinHelperPING.servername1` bis `servername10`: Anzeigename
+- `SkinHelperPING.ip1` bis `ip10`: IP-Adresse
+- `SkinHelperPING.mac1` bis `mac10`: MAC-Adresse
+- `SkinHelperPING.servercount`: Anzahl konfigurierter Geräte
+- `SkinHelperPING.serveron`: Anzahl erreichbarer Geräte
+- `SkinHelperPING.serveroff`: Anzahl nicht erreichbarer Geräte
+
+Beispiel für eine Anzeige im Skin:
+
+```xml
+<label>$INFO[Window(Home).Property(SkinHelperPING.serveron)]</label>
 ```
+
+Der Hintergrunddienst wird in den Add-on-Einstellungen unter „Start Addon as Service“ aktiviert.
+
+## Kodi-Kompatibilität
+
+Das Add-on verwendet die Kodi-Python-API ABI 3.0.0 (`xbmc.python` 3.0.0), die von Kodi 19 eingeführt wurde und für Kodi 22 Piers abwärtskompatibel ist. Der Code verwendet Python-3-Standardbibliotheken und Kodi-APIs, die in Piers weiterhin vorhanden sind. Eine Laufzeitprüfung auf Kodi 22 ist in diesem Repository nicht enthalten.
+
+---
+
+# Skinhelper PING (English)
+
+A Kodi add-on for Kodi 19 and later, including Kodi 22 “Piers”. It pings up to ten configured network hosts, managed together in one **Devices** settings category, and publishes their status, names, IP addresses, and MAC addresses as properties on the home window (`Window(10000)`). It can also wake devices with Wake-on-LAN.
+
+Skin integration is required to display status in a skin. The add-on menu can also show the current status. The optional background service is disabled by default and refreshes the values every ten seconds when enabled.
+
+Use **Network scan** in the add-on settings to search a local IPv4 network. If multiple network adapters are available, select the relevant one. On Windows, the required system tools run without visible console windows. After scanning, you can select several discovered devices one after another, edit their names, and assign each one a free device position. After each addition, the results list opens again; cancel to finish. Each scan is limited to 4096 IP addresses and can be canceled. IP and MAC addresses are collected from responding devices and the local neighbor table; names are suggested through reverse DNS when available. Some devices do not answer ping or expose a MAC address. A discovered MAC address is saved automatically. If none is found, the field stays empty; name, IP, and MAC can still be edited later in the add-on settings.
+
+Each device slot also has a **Remove device** action in the **Devices** settings category. After confirmation, it clears that slot's name, IP address, and MAC address while leaving the other devices unchanged.

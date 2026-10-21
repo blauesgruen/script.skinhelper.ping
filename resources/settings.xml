@@ -1,88 +1,259 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<settings version="2">
-
-    <section id="servers">
-
-        <category id="server1" label="32002">
+<settings version="1">
+    <section id="script.skinhelper.ping">
+        <category id="network_scan" label="32013">
             <group id="1">
+                <setting id="scan_network" type="string" label="32014">
+                    <default></default>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,scan)</data>
+                        <close>true</close>
+                    </control>
+                </setting>
+            </group>
+        </category>
+        <category id="devices" label="32041">
+            <group id="1" label="32002">
                 <setting id="name1" type="string" label="32007">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
                 </setting>
-                <setting id="ip1" type="ipaddress" label="32008">
+                <setting id="ip1" type="string" label="32008">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
                 </setting>
                 <setting id="mac1" type="string" label="32009">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device1" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove1)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
-        </category>
-
-        <category id="server2" label="32003">
-            <group id="1">
+            <group id="2" label="32002">
                 <setting id="name2" type="string" label="32007">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
                 </setting>
-                <setting id="ip2" type="ipaddress" label="32008">
+                <setting id="ip2" type="string" label="32008">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
                 </setting>
                 <setting id="mac2" type="string" label="32009">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device2" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove2)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
-        </category>
-
-        <category id="server3" label="32004">
-            <group id="1">
+            <group id="3" label="32003">
                 <setting id="name3" type="string" label="32007">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
                 </setting>
-                <setting id="ip3" type="ipaddress" label="32008">
+                <setting id="ip3" type="string" label="32008">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
                 </setting>
                 <setting id="mac3" type="string" label="32009">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device3" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove3)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
-        </category>
-
-        <category id="server4" label="32005">
-            <group id="1">
+            <group id="4" label="32004">
                 <setting id="name4" type="string" label="32007">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
                 </setting>
-                <setting id="ip4" type="ipaddress" label="32008">
+                <setting id="ip4" type="string" label="32008">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
                 </setting>
                 <setting id="mac4" type="string" label="32009">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device4" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove4)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
-        </category>
-
-        <category id="server5" label="32006">
-            <group id="1">
+            <group id="5" label="32005">
                 <setting id="name5" type="string" label="32007">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
                 </setting>
-                <setting id="ip5" type="ipaddress" label="32008">
+                <setting id="ip5" type="string" label="32008">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
                 </setting>
                 <setting id="mac5" type="string" label="32009">
                     <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device5" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove5)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
+            </group>
+            <group id="6" label="32036">
+                <setting id="name6" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip6" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac6" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device6" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove6)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
+            </group>
+            <group id="7" label="32037">
+                <setting id="name7" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip7" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac7" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device7" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove7)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
+            </group>
+            <group id="8" label="32038">
+                <setting id="name8" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip8" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac8" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device8" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove8)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
+            </group>
+            <group id="9" label="32039">
+                <setting id="name9" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip9" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac9" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device9" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove9)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
+            </group>
+            <group id="10" label="32040">
+                <setting id="name10" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip10" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac10" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device10" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove10)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
         </category>
-
-    </section>
-
-    <section id="options">
-        <category id="service_cat" label="5">
+        <category id="options" label="5">
             <group id="1">
                 <setting id="service" type="boolean" label="32012">
                     <default>false</default>
+                    <control type="toggle" />
                 </setting>
             </group>
         </category>
     </section>
-
 </settings>
