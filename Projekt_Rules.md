@@ -21,7 +21,7 @@ Kodi-Skins lesen die Werte aus `Window(10000)`. Die Dokumentation der Skin-Integ
 - Skin-Property-Präfix: `SkinHelperPING`.
 - Pro Gerät: `serverN` (`on`/`off` bei konfigurierter IP), `servernameN`, `ipN`, `macN`.
 - Zusammenfassungen: `servercount`, `serveron`, `serveroff`.
-- Script-Aufrufe: ohne Parameter für die Auswahlliste, `status` zur Statusaktualisierung und `wol1` bis `wol5` für Wake-on-LAN.
+- Script-Aufrufe: ohne Parameter für die Auswahlliste, `status` zur Statusaktualisierung, `wol1` bis `wol10` für Wake-on-LAN und `remove1` bis `remove10` für die Löschaktionen in den Geräteeinstellungen.
 
 Änderungen an diesen Namen oder Aufrufverträgen können bestehende Skins brechen. Sie müssen deshalb gemeinsam mit README und Kompatibilitätsfolgen angepasst werden.
 
