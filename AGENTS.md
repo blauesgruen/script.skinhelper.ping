@@ -1,6 +1,6 @@
 # Projektanweisungen
 
-Diese Regeln gelten für `script.skinhelper.ping`, ein Kodi-Add-on zur Erreichbarkeitsanzeige und zum Aufwecken von bis zu fünf Netzwerkgeräten.
+Diese Regeln gelten für `script.skinhelper.ping`, ein Kodi-Add-on zur Erreichbarkeitsanzeige und zum Aufwecken von bis zu zehn Netzwerkgeräten.
 
 ## Vorrang
 

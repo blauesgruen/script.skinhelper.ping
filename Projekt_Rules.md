@@ -2,7 +2,7 @@
 
 ## Zweck und Aufbau
 
-`script.skinhelper.ping` ist ein Kodi-Script-Add-on. `default.py` prüft bis zu fünf eingetragene Geräte per Ping, zeigt den Status an und kann Wake-on-LAN senden. `service.py` ist ein optionaler Kodi-Hintergrunddienst. `resources/settings.xml` enthält die Einstellungen; Übersetzungen liegen unter `resources/language/`.
+`script.skinhelper.ping` ist ein Kodi-Script-Add-on. `default.py` prüft bis zu zehn eingetragene Geräte per Ping, zeigt den Status an und kann Wake-on-LAN senden. `service.py` ist ein optionaler Kodi-Hintergrunddienst. `resources/settings.xml` enthält die Einstellungen; Übersetzungen liegen unter `resources/language/`.
 
 Kodi-Skins lesen die Werte aus `Window(10000)`. Die Dokumentation der Skin-Integration steht in `README.md`.
 
@@ -17,7 +17,7 @@ Kodi-Skins lesen die Werte aus `Window(10000)`. Die Dokumentation der Skin-Integ
 ## Schnittstellen, die stabil bleiben müssen
 
 - Add-on-ID: `script.skinhelper.ping`.
-- Einstellungsschlüssel: `name1`–`name5`, `ip1`–`ip5`, `mac1`–`mac5` und `service`.
+- Einstellungsschlüssel: `name1`–`name10`, `ip1`–`ip10`, `mac1`–`mac10` und `service`.
 - Skin-Property-Präfix: `SkinHelperPING`.
 - Pro Gerät: `serverN` (`on`/`off` bei konfigurierter IP), `servernameN`, `ipN`, `macN`.
 - Zusammenfassungen: `servercount`, `serveron`, `serveroff`.

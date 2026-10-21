@@ -15,8 +15,8 @@
                 </setting>
             </group>
         </category>
-        <category id="server1" label="32002">
-            <group id="1">
+        <category id="devices" label="32041">
+            <group id="1" label="32002">
                 <setting id="name1" type="string" label="32007">
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
@@ -33,9 +33,7 @@
                     <control type="edit" format="string" />
                 </setting>
             </group>
-        </category>
-        <category id="server2" label="32003">
-            <group id="1">
+            <group id="2" label="32002">
                 <setting id="name2" type="string" label="32007">
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
@@ -52,9 +50,7 @@
                     <control type="edit" format="string" />
                 </setting>
             </group>
-        </category>
-        <category id="server3" label="32004">
-            <group id="1">
+            <group id="3" label="32003">
                 <setting id="name3" type="string" label="32007">
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
@@ -71,9 +67,7 @@
                     <control type="edit" format="string" />
                 </setting>
             </group>
-        </category>
-        <category id="server4" label="32005">
-            <group id="1">
+            <group id="4" label="32004">
                 <setting id="name4" type="string" label="32007">
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
@@ -90,9 +84,7 @@
                     <control type="edit" format="string" />
                 </setting>
             </group>
-        </category>
-        <category id="server5" label="32006">
-            <group id="1">
+            <group id="5" label="32005">
                 <setting id="name5" type="string" label="32007">
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
@@ -104,6 +96,91 @@
                     <control type="edit" format="ip" />
                 </setting>
                 <setting id="mac5" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+            </group>
+            <group id="6" label="32036">
+                <setting id="name6" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip6" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac6" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+            </group>
+            <group id="7" label="32037">
+                <setting id="name7" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip7" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac7" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+            </group>
+            <group id="8" label="32038">
+                <setting id="name8" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip8" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac8" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+            </group>
+            <group id="9" label="32039">
+                <setting id="name9" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip9" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac9" type="string" label="32009">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+            </group>
+            <group id="10" label="32040">
+                <setting id="name10" type="string" label="32007">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="string" />
+                </setting>
+                <setting id="ip10" type="string" label="32008">
+                    <default></default>
+                    <constraints><allowempty>true</allowempty></constraints>
+                    <control type="edit" format="ip" />
+                </setting>
+                <setting id="mac10" type="string" label="32009">
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />

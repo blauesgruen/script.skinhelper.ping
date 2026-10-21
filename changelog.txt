@@ -1,8 +1,20 @@
-Unveröffentlicht
+v4.1.1
 - Add-on-Einstellungen für Kodi 22 repariert; bestehende Geräte-Einstellungs-IDs bleiben erhalten.
-- Abbrechbare Suche im lokalen IPv4-Netz mit Adapterauswahl und Übernahme gefundener Geräte ergänzt.
-- Gerätenamen lassen sich vor dem Hinzufügen bearbeiten; manuelle Eingabe bleibt möglich.
+- Abbrechbare Suche im lokalen IPv4-Netz mit Adapterauswahl und Übernahme mehrerer gefundener Geräte ergänzt.
+- Bis zu zehn Geräteplätze in einer gemeinsamen Kategorie zusammengefasst; Position beim Hinzufügen auswählbar.
+- Windows-Netzwerksuche ohne sichtbare Konsolenfenster; Geräteadressen werden aus der ARP-Tabelle gelesen.
+- Nachbearbeitung nach dem IP-Scan begrenzt, damit langsame Reverse-DNS-Abfragen den Suchdialog nicht festhalten.
+- Gerätenamen lassen sich vor dem Hinzufügen bearbeiten; gefundene MAC-Adressen werden direkt übernommen und bleiben nachträglich änderbar.
 - Add-on-Symbol mit einer klareren Netzwerk- und IP-Grafik überarbeitet.
+
+v4.1.1 (English)
+- Repair Kodi 22 add-on settings while preserving existing device setting IDs.
+- Add a cancelable local IPv4 network scan with adapter selection and multi-device import.
+- Group up to ten device slots in one settings category and select a slot when adding a device.
+- Run Windows network scan tools without visible console windows and read device addresses from the ARP table.
+- Bound post-scan processing so slow reverse-DNS lookups do not hold the scan dialog.
+- Allow device names to be edited before import; automatically import discovered MAC addresses, which remain editable later.
+- Refresh the add-on icon with a clearer network and IP graphic.
 
 v4.1.0
 - Kodi 22 "Piers" compatibility: retain Kodi Python ABI 3.0.0 support (Kodi 19+).

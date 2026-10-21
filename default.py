@@ -24,6 +24,7 @@ icon_off = os.path.join(__addonpath__, 'resources', 'media', 'offline.png')
 WINDOW = xbmcgui.Window(10000)
 PROPERTY_PREFIX = 'SkinHelperPING'
 MAC_ADDRESS_PATTERN = re.compile(r'^(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$')
+DEVICE_SLOT_COUNT = 10
 
 
 def wol(mac):
@@ -36,6 +37,9 @@ def wol(mac):
 
 def ping(current_ip_address, timeout=5):
     count = 'n' if platform.system().lower() == 'windows' else 'c'
+    process_options = {}
+    if os.name == 'nt':
+        process_options['creationflags'] = getattr(subprocess, 'CREATE_NO_WINDOW', 0x08000000)
     try:
         subprocess.run(
             ['ping', '-{}'.format(count), '1', current_ip_address],
@@ -43,6 +47,7 @@ def ping(current_ip_address, timeout=5):
             timeout=timeout,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            **process_options
         )
         return True
     except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
@@ -54,13 +59,26 @@ def _normalized_mac(mac):
     return (mac or '').replace('-', ':').replace(':', '').lower()
 
 
-def scan_network_and_add_device():
-    dialog = xbmcgui.Dialog()
-    free_slots = [
-        number for number in range(1, 6)
+def _free_device_slots():
+    return [
+        number for number in range(1, DEVICE_SLOT_COUNT + 1)
         if not any(__addon__.getSetting('{}{}'.format(key, number)).strip() for key in ('ip', 'mac', 'name'))
     ]
-    if not free_slots:
+
+
+def _device_is_configured(device):
+    device_mac = _normalized_mac(device.get('mac', ''))
+    for number in range(1, DEVICE_SLOT_COUNT + 1):
+        current_ip = __addon__.getSetting('ip{}'.format(number)).strip()
+        current_mac = _normalized_mac(__addon__.getSetting('mac{}'.format(number)))
+        if current_ip == device['ip'] or (device_mac and current_mac == device_mac):
+            return True
+    return False
+
+
+def scan_network_and_add_device():
+    dialog = xbmcgui.Dialog()
+    if not _free_device_slots():
         dialog.ok(__addonname__, __loc__(32025))
         return
 
@@ -91,7 +109,9 @@ def scan_network_and_add_device():
     progress.create(__addonname__, __loc__(32018).format(selected_network['network']))
 
     def update_progress(completed, total):
-        percent = int(completed * 100 / total) if total else 100
+        # Reserve the last 10% for reading the neighbor table and bounded
+        # reverse-DNS lookups after all ping probes have completed.
+        percent = int(completed * 90 / total) if total else 90
         progress.update(percent, __loc__(32019).format(completed, total))
 
     try:
@@ -100,6 +120,8 @@ def scan_network_and_add_device():
             update_progress,
             progress.iscanceled,
         )
+        if found is not None:
+            progress.update(100, __loc__(32019).format(host_count, host_count))
     except Exception as error:
         xbmc.log('[script.skinhelper.ping] Network scan failed: {}'.format(error), xbmc.LOGERROR)
         found = []
@@ -113,55 +135,55 @@ def scan_network_and_add_device():
         dialog.ok(__addonname__, __loc__(32021))
         return
 
-    items = [
-        '{} — {} — {}'.format(item['name'], item['ip'], item['mac'] or __loc__(32022))
-        for item in found
-    ]
-    selection = dialog.select(__loc__(32023), items)
-    if selection < 0:
-        return
-    device = found[selection]
-
-    name = dialog.input(
-        __loc__(32024),
-        defaultt=device['name'] or device['ip'],
-        type=xbmcgui.INPUT_ALPHANUM,
-    )
-    if not name:
-        return
-    name = name.strip()
-    if not name:
+    available = [device for device in found if not _device_is_configured(device)]
+    if not available:
+        dialog.ok(__addonname__, __loc__(32035))
         return
 
-    mac = dialog.input(
-        __loc__(32027),
-        defaultt=device['mac'],
-        type=xbmcgui.INPUT_ALPHANUM,
-    )
-    if mac is None:
-        return
-    mac = mac.strip()
-    if mac and not MAC_ADDRESS_PATTERN.match(mac):
-        dialog.ok(__addonname__, __loc__(32028))
-        return
-    if not mac and not dialog.yesno(__addonname__, __loc__(32032)):
-        return
-
-    for number in range(1, 6):
-        current_ip = __addon__.getSetting('ip{}'.format(number)).strip()
-        current_mac = __addon__.getSetting('mac{}'.format(number)).strip()
-        if current_ip == device['ip'] or (mac and _normalized_mac(current_mac) == _normalized_mac(mac)):
-            dialog.ok(__addonname__, __loc__(32029))
+    while available:
+        free_slots = _free_device_slots()
+        if not free_slots:
+            dialog.ok(__addonname__, __loc__(32025))
             return
 
-    slot = free_slots[0]
-    summary = '{}\n{}\n{}'.format(name, device['ip'], mac or __loc__(32022))
-    if not dialog.yesno(__addonname__, __loc__(32030).format(slot, summary)):
-        return
-    __addon__.setSetting('name{}'.format(slot), name)
-    __addon__.setSetting('ip{}'.format(slot), device['ip'])
-    __addon__.setSetting('mac{}'.format(slot), mac)
-    dialog.ok(__addonname__, __loc__(32031).format(slot))
+        items = [
+            '{} \u2014 {} \u2014 {}'.format(item['name'], item['ip'], item['mac'] or __loc__(32022))
+            for item in available
+        ]
+        selection = dialog.select(__loc__(32023), items)
+        if selection < 0:
+            return
+        device = available[selection]
+
+        name = dialog.input(
+            __loc__(32024),
+            defaultt=device['name'] or device['ip'],
+            type=xbmcgui.INPUT_ALPHANUM,
+        )
+        if not name or not name.strip():
+            continue
+        name = name.strip()
+
+        mac = device.get('mac', '') or ''
+        if _device_is_configured({'ip': device['ip'], 'mac': mac}):
+            dialog.ok(__addonname__, __loc__(32029))
+            continue
+
+        free_slots = _free_device_slots()
+        slot_labels = [__loc__(32034).format(number) for number in free_slots]
+        slot_selection = dialog.select(__loc__(32033), slot_labels)
+        if slot_selection < 0:
+            continue
+        slot = free_slots[slot_selection]
+
+        summary = '{}\n{}'.format(name, device['ip'])
+        if not dialog.yesno(__addonname__, __loc__(32030).format(slot, summary)):
+            continue
+        __addon__.setSetting('name{}'.format(slot), name)
+        __addon__.setSetting('ip{}'.format(slot), device['ip'])
+        __addon__.setSetting('mac{}'.format(slot), mac)
+        available.remove(device)
+        dialog.ok(__addonname__, __loc__(32031).format(slot))
 
 
 class Hosts:
@@ -172,7 +194,7 @@ class Hosts:
         self.serveroff = 0
         self.host = list()
 
-        for host_nr in range(0, 5):
+        for host_nr in range(DEVICE_SLOT_COUNT):
             self.host.append([__addon__.getSetting('ip{}'.format(host_nr + 1)),
                                 __addon__.getSetting('mac{}'.format(host_nr + 1)),
                                 __addon__.getSetting('name{}'.format(host_nr + 1)),
@@ -212,7 +234,7 @@ if __name__ == '__main__':
                 host_nr = int(param[3:]) - 1
             except ValueError:
                 host_nr = -1
-            if host_nr not in range(5):
+            if host_nr not in range(DEVICE_SLOT_COUNT):
                 xbmc.log('Wrong WOL parameter: {}'.format(param), xbmc.LOGERROR)
                 exit(1)
             xbmc.log('Send WOL packet to {} (MAC {})'.format(hosts.host[host_nr][2], hosts.host[host_nr][1]), xbmc.LOGINFO)
@@ -221,7 +243,7 @@ if __name__ == '__main__':
             xbmc.log('Wrong parameter: {}'.format(param), xbmc.LOGERROR)
         else:
             host_list = list()
-            for host_nr in range(0, 5):
+            for host_nr in range(DEVICE_SLOT_COUNT):
                 if hosts.host[host_nr][0] == '': continue
                 liz = xbmcgui.ListItem(label=hosts.host[host_nr][2], label2=hosts.host[host_nr][0])
                 liz.setProperty('mac', hosts.host[host_nr][1])

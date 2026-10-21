@@ -6,16 +6,26 @@ import ipaddress
 import json
 import os
 import platform
+import queue
 import re
 import socket
 import subprocess
 import sys
+import threading
+import time
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 
 
 MAX_SCAN_HOSTS = 4096
 MAX_WORKERS = 64
 MAC_PATTERN = re.compile(r'^(?:[0-9a-f]{2}[:-]){5}[0-9a-f]{2}$', re.IGNORECASE)
+
+
+def _hidden_process_options():
+    """Prevent Windows console tools from opening a window for every probe."""
+    if os.name != 'nt':
+        return {}
+    return {'creationflags': getattr(subprocess, 'CREATE_NO_WINDOW', 0x08000000)}
 
 
 def _run(command, timeout=5):
@@ -27,6 +37,7 @@ def _run(command, timeout=5):
             stderr=subprocess.DEVNULL,
             universal_newlines=True,
             timeout=timeout,
+            **_hidden_process_options()
         )
         return result.stdout
     except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
@@ -190,6 +201,7 @@ def _probe(address):
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             timeout=1.5,
+            **_hidden_process_options()
         )
         return result.returncode == 0
     except (OSError, subprocess.TimeoutExpired):
@@ -202,21 +214,17 @@ def _mac(value):
 
 
 def _windows_neighbors():
-    command = (
-        "$ErrorActionPreference='Stop'; "
-        "Get-NetNeighbor -AddressFamily IPv4 | "
-        "Select-Object IPAddress,LinkLayerAddress | ConvertTo-Json -Compress"
-    )
-    output = _run(['powershell.exe', '-NoProfile', '-NonInteractive', '-Command', command], timeout=10)
-    if not output:
-        output = _run(['pwsh.exe', '-NoProfile', '-NonInteractive', '-Command', command], timeout=10)
-    try:
-        entries = json.loads(output) if output else []
-    except (TypeError, ValueError):
-        return {}
-    if isinstance(entries, dict):
-        entries = [entries]
-    return {entry.get('IPAddress', ''): _mac(entry.get('LinkLayerAddress', '')) for entry in entries}
+    # Read the neighbor cache directly; this avoids starting PowerShell after
+    # the scan reaches its final progress update.
+    output = _run(['arp', '-a'], timeout=5)
+    neighbors = {}
+    for line in output.splitlines():
+        match = re.match(r'^\s*(\d+(?:\.\d+){3})\s+([0-9a-fA-F:-]{17})\s+', line)
+        if match:
+            mac = _mac(match.group(2))
+            if mac:
+                neighbors[match.group(1)] = mac
+    return neighbors
 
 
 def _posix_neighbors():
@@ -256,6 +264,42 @@ def _hostname(address):
         return address
 
 
+def _resolve_hostnames(addresses, timeout=2):
+    """Resolve PTR names concurrently, but never hold the scan open for DNS."""
+    if not addresses:
+        return {}
+
+    pending = queue.Queue()
+    for address in addresses:
+        pending.put(address)
+
+    names = {}
+    remaining = [len(addresses)]
+    lock = threading.Lock()
+    finished = threading.Event()
+
+    def resolve_worker():
+        while True:
+            try:
+                address = pending.get_nowait()
+            except queue.Empty:
+                return
+            try:
+                names[address] = _hostname(address)
+            finally:
+                pending.task_done()
+                with lock:
+                    remaining[0] -= 1
+                    if remaining[0] == 0:
+                        finished.set()
+
+    for _ in range(min(8, len(addresses))):
+        thread = threading.Thread(target=resolve_worker, daemon=True)
+        thread.start()
+    finished.wait(timeout)
+    return {address: names.get(address, address) for address in addresses}
+
+
 def scan_network(network, progress_callback, cancel_callback):
     """Probe one bounded IPv4 network and return discovered IP/MAC/name records."""
     addresses = host_addresses(network)
@@ -291,12 +335,19 @@ def scan_network(network, progress_callback, cancel_callback):
 
     neighbors = get_neighbors()
     discovered = set(responding)
-    discovered.update(address for address in neighbors if address in network['network'])
+    for address in neighbors:
+        try:
+            if ipaddress.ip_address(address) in network['network']:
+                discovered.add(address)
+        except ValueError:
+            continue
     records = []
-    for address in sorted(discovered, key=lambda value: tuple(int(part) for part in value.split('.'))):
+    ordered_addresses = sorted(discovered, key=lambda value: tuple(int(part) for part in value.split('.')))
+    hostnames = _resolve_hostnames(ordered_addresses)
+    for address in ordered_addresses:
         records.append({
             'ip': address,
             'mac': neighbors.get(address, ''),
-            'name': _hostname(address),
+            'name': hostnames.get(address, address),
         })
     return records
