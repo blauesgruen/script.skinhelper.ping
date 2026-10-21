@@ -76,6 +76,44 @@ def _device_is_configured(device):
     return False
 
 
+def remove_device(slot):
+    dialog = xbmcgui.Dialog()
+    name = __addon__.getSetting('name{}'.format(slot)).strip()
+    ip = __addon__.getSetting('ip{}'.format(slot)).strip()
+    mac = __addon__.getSetting('mac{}'.format(slot)).strip()
+    if not any((name, ip, mac)):
+        return
+
+    description = '{}\n{}'.format(name or __loc__(32044).format(slot), ip)
+    if not dialog.yesno(__addonname__, __loc__(32043).format(description)):
+        return
+
+    for key in ('name', 'ip', 'mac'):
+        __addon__.setSetting('{}{}'.format(key, slot), '')
+
+    # Clear this slot immediately and refresh totals from the remaining cached
+    # statuses without pinging every configured device again.
+    WINDOW.clearProperty('{}.server{}'.format(PROPERTY_PREFIX, slot))
+    for key in ('servername', 'ip', 'mac'):
+        WINDOW.setProperty('{}.{}{}'.format(PROPERTY_PREFIX, key, slot), '')
+
+    configured = online = offline = 0
+    for number in range(1, DEVICE_SLOT_COUNT + 1):
+        if not __addon__.getSetting('ip{}'.format(number)).strip():
+            continue
+        configured += 1
+        status = WINDOW.getProperty('{}.server{}'.format(PROPERTY_PREFIX, number))
+        if status == 'on':
+            online += 1
+        elif status == 'off':
+            offline += 1
+
+    WINDOW.setProperty('{}.servercount'.format(PROPERTY_PREFIX), str(configured))
+    WINDOW.setProperty('{}.serveron'.format(PROPERTY_PREFIX), str(online))
+    WINDOW.setProperty('{}.serveroff'.format(PROPERTY_PREFIX), str(offline))
+    dialog.notification(__addonname__, __loc__(32045).format(slot), __icon__)
+
+
 def scan_network_and_add_device():
     dialog = xbmcgui.Dialog()
     if not _free_device_slots():
@@ -225,6 +263,15 @@ if __name__ == '__main__':
     param = sys.argv[1] if len(sys.argv) > 1 else ''
     if param == 'scan':
         scan_network_and_add_device()
+    elif param.startswith('remove'):
+        try:
+            slot = int(param[6:])
+        except ValueError:
+            slot = 0
+        if slot not in range(1, DEVICE_SLOT_COUNT + 1):
+            xbmc.log('Wrong remove parameter: {}'.format(param), xbmc.LOGERROR)
+            exit(1)
+        remove_device(slot)
     else:
         hosts = Hosts()
         if param == 'status':

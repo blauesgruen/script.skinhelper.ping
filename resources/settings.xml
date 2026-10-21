@@ -32,6 +32,12 @@
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
                 </setting>
+                <setting id="remove_device1" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove1)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
             </group>
             <group id="2" label="32002">
                 <setting id="name2" type="string" label="32007">
@@ -48,6 +54,12 @@
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device2" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove2)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
             <group id="3" label="32003">
@@ -66,6 +78,12 @@
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
                 </setting>
+                <setting id="remove_device3" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove3)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
             </group>
             <group id="4" label="32004">
                 <setting id="name4" type="string" label="32007">
@@ -82,6 +100,12 @@
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device4" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove4)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
             <group id="5" label="32005">
@@ -100,6 +124,12 @@
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
                 </setting>
+                <setting id="remove_device5" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove5)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
             </group>
             <group id="6" label="32036">
                 <setting id="name6" type="string" label="32007">
@@ -116,6 +146,12 @@
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device6" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove6)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
             <group id="7" label="32037">
@@ -134,6 +170,12 @@
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
                 </setting>
+                <setting id="remove_device7" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove7)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
             </group>
             <group id="8" label="32038">
                 <setting id="name8" type="string" label="32007">
@@ -150,6 +192,12 @@
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device8" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove8)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
             <group id="9" label="32039">
@@ -168,6 +216,12 @@
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
                 </setting>
+                <setting id="remove_device9" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove9)</data>
+                        <close>false</close>
+                    </control>
+                </setting>
             </group>
             <group id="10" label="32040">
                 <setting id="name10" type="string" label="32007">
@@ -184,6 +238,12 @@
                     <default></default>
                     <constraints><allowempty>true</allowempty></constraints>
                     <control type="edit" format="string" />
+                </setting>
+                <setting id="remove_device10" type="action" label="32042">
+                    <control type="button" format="action">
+                        <data>RunScript(script.skinhelper.ping,remove10)</data>
+                        <close>false</close>
+                    </control>
                 </setting>
             </group>
         </category>

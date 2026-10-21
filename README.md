@@ -8,6 +8,8 @@ Eine Skin-Integration ist nötig, wenn der Status im Skin angezeigt werden soll.
 
 Trage in den Add-on-Einstellungen je Gerät Name, IP-Adresse und MAC-Adresse ein. Für eine Statusprüfung wird eine IP-Adresse benötigt; zum Aufwecken per Wake-on-LAN eine gültige MAC-Adresse. Aktuell können bis zu zehn Geräte konfiguriert werden. Alle zehn Plätze stehen gemeinsam in der Kategorie **Geräte**.
 
+Jeder Geräteplatz hat dort die Aktion **Gerät löschen**. Nach einer Sicherheitsabfrage werden Name, IP-Adresse und MAC-Adresse dieses Platzes geleert; die übrigen Geräte bleiben unverändert.
+
 Mit **Netzwerksuche** kannst Du ein lokales IPv4-Netz durchsuchen. Bei mehreren Netzwerkadaptern wählst Du den passenden aus. Unter Windows laufen die dafür gestarteten Systemwerkzeuge ohne sichtbare Konsolenfenster. Nach dem Scan kannst Du mehrere gefundene Geräte nacheinander auswählen, Namen bearbeiten und jeweils eine freie Geräteposition festlegen. Nach jeder Übernahme kehrst Du zur Ergebnisliste zurück; Abbrechen beendet die Auswahl. Der Scan ist auf 4096 IP-Adressen pro Durchlauf begrenzt und kann abgebrochen werden. IP- und MAC-Adressen werden aus erreichbaren Geräten und der lokalen Nachbartabelle ermittelt; Gerätenamen werden nach Möglichkeit per Reverse-DNS vorgeschlagen. Nicht jedes Gerät beantwortet Ping oder stellt seine MAC-Adresse bereit. Eine gefundene MAC-Adresse wird direkt übernommen. Wenn sie fehlt, bleibt das Feld leer; Name, IP und MAC lassen sich später weiterhin in den Add-on-Einstellungen ändern.
 
 ## Aufruf aus einem Skin
@@ -59,3 +61,5 @@ A Kodi add-on for Kodi 19 and later, including Kodi 22 “Piers”. It pings up 
 Skin integration is required to display status in a skin. The add-on menu can also show the current status. The optional background service is disabled by default and refreshes the values every ten seconds when enabled.
 
 Use **Network scan** in the add-on settings to search a local IPv4 network. If multiple network adapters are available, select the relevant one. On Windows, the required system tools run without visible console windows. After scanning, you can select several discovered devices one after another, edit their names, and assign each one a free device position. After each addition, the results list opens again; cancel to finish. Each scan is limited to 4096 IP addresses and can be canceled. IP and MAC addresses are collected from responding devices and the local neighbor table; names are suggested through reverse DNS when available. Some devices do not answer ping or expose a MAC address. A discovered MAC address is saved automatically. If none is found, the field stays empty; name, IP, and MAC can still be edited later in the add-on settings.
+
+Each device slot also has a **Remove device** action in the **Devices** settings category. After confirmation, it clears that slot's name, IP address, and MAC address while leaving the other devices unchanged.

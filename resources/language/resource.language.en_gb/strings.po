@@ -169,3 +169,19 @@ msgstr "Device 10"
 msgctxt "#32041"
 msgid "Devices"
 msgstr "Devices"
+
+msgctxt "#32042"
+msgid "Remove device"
+msgstr "Remove device"
+
+msgctxt "#32043"
+msgid "Remove this device?\n{}"
+msgstr "Remove this device?\n{}"
+
+msgctxt "#32044"
+msgid "Device {}"
+msgstr "Device {}"
+
+msgctxt "#32045"
+msgid "Device in position {} removed."
+msgstr "Device in position {} removed."

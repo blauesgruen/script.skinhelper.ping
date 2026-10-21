@@ -1,3 +1,9 @@
+v4.1.2
+- Einzelne Geräte lassen sich in der Geräte-Kategorie nach einer Sicherheitsabfrage löschen.
+
+v4.1.2 (English)
+- Add a per-device remove action in the Devices category with a confirmation prompt.
+
 v4.1.1
 - Add-on-Einstellungen für Kodi 22 repariert; bestehende Geräte-Einstellungs-IDs bleiben erhalten.
 - Abbrechbare Suche im lokalen IPv4-Netz mit Adapterauswahl und Übernahme mehrerer gefundener Geräte ergänzt.

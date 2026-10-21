@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.skinhelper.ping" name="Skinhelper PING" version="4.1.1" provider-name="PvD, blauesgruen + KI, rewrite from _Andy_">
+<addon id="script.skinhelper.ping" name="Skinhelper PING" version="4.1.2" provider-name="PvD, blauesgruen + KI, rewrite from _Andy_">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -16,7 +16,7 @@
         <license>GPL-3.0-or-later</license>
         <source>https://github.com/blauesgruen/script.skinhelper.ping</source>
         <forum>https://www.kodinerds.net/thread/55406-release-skinhelper-ping/?postID=360349&amp;highlight=skinhelper%2Bping#post360349</forum>
-        <news>v4.1.1: Repair Kodi 22 settings, add local network scanning and device import, support up to ten devices in one settings category, and improve scan responsiveness.</news>
+        <news>v4.1.2: Add a confirmed per-device removal action in settings.</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
