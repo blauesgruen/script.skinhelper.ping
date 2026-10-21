@@ -1,0 +1,115 @@
+name: Publish merged add-on to BG-Repository
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bg-repository-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.event.pull_request.merged == true }}
+    runs-on: windows-latest
+    steps:
+      - name: Check out merged master commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Build add-on ZIP
+        shell: pwsh
+        run: |
+          .\.github\scripts\build-addon-zip.ps1 `
+            -AddonDirectory $env:GITHUB_WORKSPACE `
+            -Destination (Join-Path $env:RUNNER_TEMP 'script.skinhelper.ping.zip')
+
+      - name: Check out BG-Repository
+        uses: actions/checkout@v4
+        with:
+          repository: blauesgruen/BG-Repository
+          ref: main
+          path: bg-repository
+          token: ${{ secrets.BG_REPOSITORY_TOKEN }}
+
+      - name: Copy ZIP to Omega and Piers feeds
+        shell: pwsh
+        run: |
+          $bgRoot = Join-Path $env:GITHUB_WORKSPACE 'bg-repository'
+          $sourceZip = Join-Path $env:RUNNER_TEMP 'script.skinhelper.ping.zip'
+          $addonXml = [xml](Get-Content -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'addon.xml') -Raw)
+          $zipName = "script.skinhelper.ping-$($addonXml.addon.version).zip"
+          $feedDirectories = @('omega', 'piers') | ForEach-Object { Join-Path $bgRoot $_ }
+
+          foreach ($feedDirectory in $feedDirectories) {
+            if (-not (Test-Path -LiteralPath $feedDirectory)) {
+              throw "BG-Repository feed directory not found: $feedDirectory"
+            }
+          }
+
+          foreach ($feedDirectory in $feedDirectories) {
+            Get-ChildItem -LiteralPath $feedDirectory -File -Filter 'script.skinhelper.ping-*.zip' |
+              Remove-Item -Force
+            Copy-Item -LiteralPath $sourceZip -Destination (Join-Path $feedDirectory $zipName) -Force
+          }
+
+          git -C $bgRoot config user.name 'github-actions[bot]'
+          git -C $bgRoot config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          $published = $false
+          for ($attempt = 1; $attempt -le 3; $attempt++) {
+            git -C $bgRoot fetch origin main
+            if ($LASTEXITCODE -ne 0) { throw 'Could not fetch BG-Repository main.' }
+            git -C $bgRoot reset --hard origin/main
+            if ($LASTEXITCODE -ne 0) { throw 'Could not reset BG-Repository checkout.' }
+
+            foreach ($feedDirectory in $feedDirectories) {
+              Get-ChildItem -LiteralPath $feedDirectory -File -Filter 'script.skinhelper.ping-*.zip' |
+                Remove-Item -Force
+              Copy-Item -LiteralPath $sourceZip -Destination (Join-Path $feedDirectory $zipName) -Force
+            }
+            git -C $bgRoot add -A -- omega piers
+            if ($LASTEXITCODE -ne 0) { throw 'Could not stage the add-on ZIPs.' }
+
+            git -C $bgRoot diff --cached --quiet
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host 'The current add-on ZIP is already present in BG-Repository.'
+              $published = $true
+              break
+            }
+
+            git -C $bgRoot commit -m "Publish script.skinhelper.ping $($addonXml.addon.version) to Omega and Piers feeds"
+            if ($LASTEXITCODE -ne 0) { throw 'Could not commit the add-on ZIP.' }
+            git -C $bgRoot push origin HEAD:main
+            if ($LASTEXITCODE -eq 0) {
+              $published = $true
+              break
+            }
+            Write-Host "BG-Repository changed during push; retrying ($attempt/3)."
+          }
+          if (-not $published) { throw 'Could not publish ZIP after three attempts.' }
+
+      - name: Rebuild BG-Repository indexes
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.BG_REPOSITORY_TOKEN }}
+        run: |
+          $headers = @{
+            Accept = 'application/vnd.github+json'
+            Authorization = "Bearer $env:GH_TOKEN"
+            'X-GitHub-Api-Version' = '2022-11-28'
+          }
+          $body = @{ ref = 'main' } | ConvertTo-Json
+          Invoke-RestMethod `
+            -Method Post `
+            -Uri 'https://api.github.com/repos/blauesgruen/BG-Repository/actions/workflows/build-repository.yml/dispatches' `
+            -Headers $headers `
+            -ContentType 'application/json' `
+            -Body $body | Out-Null

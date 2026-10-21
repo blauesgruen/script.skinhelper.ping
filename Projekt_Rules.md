@@ -10,7 +10,7 @@ Kodi-Skins lesen die Werte aus `Window(10000)`. Die Dokumentation der Skin-Integ
 
 - Die bestehende Add-on-Abhängigkeit `xbmc.python` ABI `3.0.0` ist die Kompatibilitätsbasis.
 - Keine Kodi-API oder Python-Version als unterstützt ausgeben, ohne sie anhand des Codes oder eines passenden Kodi-Laufzeittests belegt zu haben.
-- Kodi 22 „Piers“ verwendet weiterhin die Python-3-Add-on-API. Für konkrete Laufzeitkompatibilität sind Add-on-Installation, Skriptausführung, Ping, Wake-on-LAN und Dienstbetrieb in der tatsächlich installierten Piers-Version zu prüfen.
+- Kodi Omega und Piers verwenden die Python-3-Add-on-API. Das Add-on verlangt `xbmc.python` ABI `3.0.0`; konkrete Laufzeitkompatibilität ist jeweils durch Tests in der Zielversion zu belegen.
 - Kodi stellt je Plattform unterschiedliche Betriebssysteme und Befehle bereit. Plattformabhängige Ping-Optionen müssen erhalten bleiben.
 - Keine zusätzliche Python-Abhängigkeit einführen, wenn Standardbibliothek oder Kodi-API ausreichen.
 
@@ -37,9 +37,10 @@ Kodi-Skins lesen die Werte aus `Window(10000)`. Die Dokumentation der Skin-Integ
 
 README dokumentiert Einrichtung, Skin-Properties, Script-Aufrufe und bekannte Laufzeitgrenzen. Änderungen an Verhalten oder Aufrufen werden dort nachvollziehbar nachgeführt. `changelog.txt` fasst umgesetzte Änderungen zusammen. Versionsnummern ändert ausschließlich die nutzende Person, sofern sie es nicht ausdrücklich anders beauftragt.
 
-## Branches und ZIP-Pakete
+## Branch und ZIP-Veröffentlichung
 
-- `omega` und `piers` werden unabhängig entwickelt. Änderungen an einem Branch dürfen den anderen nicht beeinflussen.
-- Der lokale `post-commit`-Hook baut für `script.skinhelper.ping` das ZIP des gerade ausgecheckten Branches: `omega` nach `E:\Dokumente\kodiners repo multi\21`, `piers` nach `E:\Dokumente\kodiners repo multi\22`.
+- `master` ist die gemeinsame Entwicklungsbasis für Kodi Omega und Piers. Änderungen laufen über kurzlebige Feature-Branches und Pull Requests.
+- Der lokale `post-commit`-Hook baut auf `master` das Add-on-ZIP nach `E:\Dokumente\kodiners repo multi\21`.
+- Nach dem Merge eines Pull Requests baut GitHub Actions die ZIP und veröffentlicht dieselbe Version in die Omega- und Piers-Feeds des BG-Repositories. Der Workflow benötigt das Repository-Secret `BG_REPOSITORY_TOKEN`.
 - Das Paket enthält die zur Laufzeit benötigten Add-on-Dateien, nicht die Projektregeln `AGENTS.md`, `Projekt_Rules.md`, `ML.md` oder `CLAUDE.md`. Versteckte Verzeichnisse wie `.agent`, `.github` und `.idea` werden ebenfalls ausgelassen.
 - Der Hook läuft nach einem Commit. Keine Commits nur zum Auslösen des Paketbaus erstellen; den Build bei Bedarf direkt ausführen.

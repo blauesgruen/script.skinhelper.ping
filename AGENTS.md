@@ -19,7 +19,9 @@ Diese Regeln gelten für `script.skinhelper.ping`, ein Kodi-Add-on zur Erreichba
 - Die Add-on-Version wird nur auf ausdrückliche Anweisung geändert.
 - Commit und Push erfolgen nur auf ausdrückliche Anweisung.
 - Vor einem Commit den aktiven `core.hooksPath` prüfen: auf diesem Entwicklungsrechner erstellt ein global konfigurierter `post-commit`-Hook ein Add-on-ZIP.
-- Für `script.skinhelper.ping` bestimmt der Branch das lokale ZIP-Ziel: `omega` nach `E:\Dokumente\kodiners repo multi\21`, `piers` nach `E:\Dokumente\kodiners repo multi\22`.
+- `master` ist die gemeinsame Entwicklungsbasis für Kodi Omega und Piers. Änderungen werden über kurzlebige Feature-Branches und Pull Requests eingebracht.
+- Der lokale `post-commit`-Hook baut auf `master` das Add-on-ZIP nach `E:\Dokumente\kodiners repo multi\21`. Ein gemergter Pull Request veröffentlicht dieselbe ZIP über GitHub Actions in die Omega- und Piers-Feeds des BG-Repositories.
+- Für lokale Laufzeittests kann das Add-on nach `D:\Program Files\Kodi21\portable_data\addons\script.skinhelper.ping` (Omega) oder `D:\Program Files\Kodi22\portable_data\addons\script.skinhelper.ping` (Piers) synchronisiert werden.
 - Add-on-ZIPs enthalten keine Projektregeln (`AGENTS.md`, `Projekt_Rules.md`, `ML.md`, `CLAUDE.md`) und keine versteckten Agenten-/Entwicklungsordner.
 - Ein ZIP nicht durch einen Commit erzeugen, wenn kein Commit beauftragt wurde. Den Paketbau bei Bedarf direkt mit dem Build-Skript ausführen.
 

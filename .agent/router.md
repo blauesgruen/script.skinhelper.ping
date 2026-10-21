@@ -35,7 +35,8 @@ Kein agentischer Arbeitsmodus, Subagent, Review oder Plugin darf behauptet werde
 
 ## Branches und lokale Pakete
 
-- `omega` und `piers` bleiben getrennte Entwicklungszweige.
-- Für `script.skinhelper.ping` ist das lokale ZIP-Ziel branchabhängig: `omega` → `E:\Dokumente\kodiners repo multi\21`, `piers` → `E:\Dokumente\kodiners repo multi\22`.
+- `master` ist die gemeinsame Entwicklungsbasis für Kodi Omega und Piers. Änderungen kommen über kurzlebige Feature-Branches und Pull Requests.
+- Für `script.skinhelper.ping` baut der lokale `post-commit`-Hook auf `master` nach `E:\Dokumente\kodiners repo multi\21`.
+- Ein gemergter Pull Request nach `master` stößt den GitHub-Actions-Workflow an, der dieselbe ZIP in beide BG-Repository-Feeds (`omega` und `piers`) überträgt.
 - Die ZIP darf `AGENTS.md`, `Projekt_Rules.md`, `ML.md`, `CLAUDE.md` sowie versteckte Agenten-/Entwicklungsordner nicht enthalten.
 - Ein `post-commit`-Hook baut das ZIP erst nach einem Commit. Ohne ausdrücklichen Commit-Auftrag keinen Commit dafür erstellen.
