@@ -1,11 +1,9 @@
 name: Publish merged add-on to BG-Repository
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types:
-      - closed
 
 permissions:
   contents: read
@@ -16,13 +14,12 @@ concurrency:
 
 jobs:
   publish:
-    if: ${{ github.event.pull_request.merged == true }}
     runs-on: windows-latest
     steps:
-      - name: Check out merged master commit
+      - name: Check out master commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          ref: ${{ github.sha }}
 
       - name: Build add-on ZIP
         shell: pwsh

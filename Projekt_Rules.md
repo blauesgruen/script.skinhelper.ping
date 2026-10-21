@@ -40,7 +40,7 @@ README dokumentiert Einrichtung, Skin-Properties, Script-Aufrufe und bekannte La
 ## Branch und ZIP-Veröffentlichung
 
 - `master` ist die gemeinsame Entwicklungsbasis für Kodi Omega und Piers. Änderungen laufen über kurzlebige Feature-Branches und Pull Requests.
-- Der lokale `post-commit`-Hook baut auf `master` das Add-on-ZIP nach `E:\Dokumente\kodiners repo multi\21`.
-- Nach dem Merge eines Pull Requests baut GitHub Actions die ZIP und veröffentlicht dieselbe Version in die Omega- und Piers-Feeds des BG-Repositories. Der Workflow benötigt das Repository-Secret `BG_REPOSITORY_TOKEN`.
+- Der lokale `post-commit`-Hook überspringt `master` und erstellt dort kein ZIP.
+- Bei jedem Push nach `master` baut GitHub Actions die ZIP und veröffentlicht dieselbe Version in die Omega- und Piers-Feeds des BG-Repositories. Der Workflow benötigt das Repository-Secret `BG_REPOSITORY_TOKEN`.
 - Das Paket enthält die zur Laufzeit benötigten Add-on-Dateien, nicht die Projektregeln `AGENTS.md`, `Projekt_Rules.md`, `ML.md` oder `CLAUDE.md`. Versteckte Verzeichnisse wie `.agent`, `.github` und `.idea` werden ebenfalls ausgelassen.
 - Der Hook läuft nach einem Commit. Keine Commits nur zum Auslösen des Paketbaus erstellen; den Build bei Bedarf direkt ausführen.
